@@ -5,10 +5,31 @@
 # See documentation in:
 # http://doc.scrapy.org/en/latest/topics/items.html
 
-import scrapy
+from scrapy.item import Item, Field
 
 
-class EbookItem(scrapy.Item):
+class EbookItem(Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
-    pass
+
+    # Primary Fields
+    Title = Field()
+    Subtitle = Field()
+    Image = Field()
+    Author = Field()
+    ISBIN-10 = Field()
+    Year = Field()
+    Pages = Field()
+    Language = Field()
+    File Size = Field()
+    File Format = Field()
+    Category = Field()
+    Description = Field()
+    Download_Link = Field()
+
+    # Hosekeeping fields
+    url = Field()
+    project = Field()
+    spider = Field()
+    server = Field()
+    date = Field()
