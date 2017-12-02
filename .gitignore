@@ -110,7 +110,7 @@ venv.bak/
 .pydevproject/
 
 #notes
-*.txt
+notes.txt
 *.csv
 
 #libre office
