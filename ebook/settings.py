@@ -64,9 +64,18 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'ebook.pipelines.EbookPipeline': 300,
-#}
+ITEM_PIPELINES = {
+
+   'scrapy_mongodb.MongoDBPipeline': 500,
+
+}
+
+#scrapy_mongo.MongoDBPipeline Settings see: https://github.com/sebdah/scrapy-mongodb
+MONGODB_URI = 'mongodb://dmitry30:13Trentr!#@ds129166.mlab.com:29166/ebooks'
+MONGODB_DATABASE = 'ebooks'
+MONGODB_COLLECTION = 'allit'
+MONGODB_UNIQUE_KEY = 'ISBIN'
+MONGO_ADD_TIMESTAMP = True
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
