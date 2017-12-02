@@ -8,7 +8,7 @@ from datetime import date
 import socket
 
 class CrawlSpider(SitemapSpider):
-    name = 'crawl'
+    name = 'map'
     sitemap_urls = ['http://www.allitebooks.com/post-sitemap1.xml',
                     'http://www.allitebooks.com/post-sitemap2.xml',
                     'http://www.allitebooks.com/post-sitemap3.xml',
