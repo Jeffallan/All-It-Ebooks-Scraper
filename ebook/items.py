@@ -32,5 +32,4 @@ class EbookItem(Item):
     project = Field()
     spider = Field()
     server = Field()
-    date = Field()
-    
+    #date = Field()
