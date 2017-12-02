@@ -9,7 +9,15 @@ import socket
 
 class CrawlSpider(SitemapSpider):
     name = 'crawl'
-    sitemap_urls = ['http://www.allitebooks.com/sitemap_index.xml']
+    sitemap_urls = ['http://www.allitebooks.com/post-sitemap1.xml',
+                    'http://www.allitebooks.com/post-sitemap2.xml',
+                    'http://www.allitebooks.com/post-sitemap3.xml',
+                    'http://www.allitebooks.com/post-sitemap4.xml',
+                    'http://www.allitebooks.com/post-sitemap5.xml',
+                    'http://www.allitebooks.com/post-sitemap6.xml',
+                    'http://www.allitebooks.com/post-sitemap7.xml',
+                    'http://www.allitebooks.com/post-sitemap8.xml']
+    # sitemap_follow = ['/post_sitemap1.xml']
 
     def parse(self, response):
 
@@ -27,12 +35,18 @@ class CrawlSpider(SitemapSpider):
         l.add_xpath('Language', '//div[contains(@class, "book-detail")]//dd[5]/text()')
         l.add_xpath('File_Size', '//div[contains(@class, "book-detail")]//dd[6]/text()')
         l.add_xpath('File_Format', '//div[contains(@class, "book-detail")]//dd[7]/text()')
-        l.add_xpath('Category', '//div[contains(@class, "book-detail")]//dd[8]/text()')
+        l.add_xpath('Category', '//div[contains(@class, "book-detail")]//dd[8]//a/text()')
         # end rework table info
 
-        # MapCompose for Description? lambda s: re.sub(r'[\n\b\f\r\t\v\x00]', ' ', s)
+        # MapCompose for Description? lambda s.replace \n \b \f \r \t \v \x00]', '')
         l.add_xpath('Description', '//div[contains(@class,"entry-content")]',
-                    MapCompose(lambda s: s.replace(r'[\n\b\f\r\t\v\x00]', '')))
+                    MapCompose(lambda s: s.replace('\n', ''),
+                               lambda s: s.replace('\b', ''),
+                               lambda s: s.replace('\f', ''),
+                               lambda s: s.replace('\r', ''),
+                               lambda s: s.replace('\t', ''),
+                               lambda s: s.replace('\v', ''),
+                               lambda s: s.replace('\x00', ''),))
         # MapCompose replace ' ' with %20
         l.add_xpath('Download_Link', '//a[contains(@href,"file")]/@href',
                     MapCompose(lambda s: s.replace(' ', '%20')))
