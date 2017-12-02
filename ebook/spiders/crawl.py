@@ -3,8 +3,8 @@ from scrapy.spiders import SitemapSpider
 from ebook.items import EbookItem
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import MapCompose
-import datetime
-import urlparse
+from datetime import date
+# import urlparse
 import socket
 
 class CrawlSpider(SitemapSpider):
@@ -32,16 +32,16 @@ class CrawlSpider(SitemapSpider):
 
         # MapCompose for Description? lambda s: re.sub(r'[\n\b\f\r\t\v\x00]', ' ', s)
         l.add_xpath('Description', '//div[contains(@class,"entry-content")]',
-                    MapCompose(lambda s: re.sub(r'[\n\b\f\r\t\v\x00]', '', s)))
+                    MapCompose(lambda s: s.replace(r'[\n\b\f\r\t\v\x00]', '')))
         # MapCompose replace ' ' with %20
         l.add_xpath('Download_Link', '//a[contains(@href,"file")]/@href',
-                    MapCompose(lambda i: i.replace(' ', '%20')))
+                    MapCompose(lambda s: s.replace(' ', '%20')))
 
         # Housekeeping Fields
         l.add_value('url', response.url)
         l.add_value('project', self.settings.get('BOT_NAME'))
         l.add_value('spider', self.name)
         l.add_value('server', socket.gethostname())
-        l.add_value('date', datetime.now())
+        l.add_value('date', date.today())
 
         return l.load_item()

@@ -33,3 +33,4 @@ class EbookItem(Item):
     spider = Field()
     server = Field()
     date = Field()
+    
