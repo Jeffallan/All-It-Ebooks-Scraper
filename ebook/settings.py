@@ -71,9 +71,9 @@ ITEM_PIPELINES = {
 }
 
 #scrapy_mongo.MongoDBPipeline Settings see: https://github.com/sebdah/scrapy-mongodb
-MONGODB_URI = 'mongodb://dmitry30:13Trentr!#@ds129166.mlab.com:29166/ebooks'
-MONGODB_DATABASE = 'ebooks'
-MONGODB_COLLECTION = 'allit'
+MONGODB_URI = ''
+MONGODB_DATABASE = ''
+MONGODB_COLLECTION = ''
 MONGODB_UNIQUE_KEY = 'ISBIN'
 MONGO_ADD_TIMESTAMP = True
 
