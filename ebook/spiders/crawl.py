@@ -3,9 +3,10 @@ from scrapy.spiders import SitemapSpider
 from ebook.items import EbookItem
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import MapCompose
-from datetime import date
+# from datetime import date
 # import urlparse
 import socket
+
 
 class CrawlSpider(SitemapSpider):
     name = 'map'
@@ -24,27 +25,41 @@ class CrawlSpider(SitemapSpider):
         l = ItemLoader(item=EbookItem(), response=response)
 
         # Primary Fields
-        l.add_xpath('Title', '//header/h1/text()', MapCompose(unicode.strip))
-        l.add_xpath('Subtitle', '//header/h4/text()', MapCompose(unicode.strip))
-        l.add_xpath('Image', '//img[contains(@class,"attachment-post-thumbnail")]/@src',
+        l.add_xpath('Title',
+                    '//header/h1/text()',
                     MapCompose(unicode.strip))
-        l.add_xpath('Author', '//div[contains(@class, "book-detail")]//dd[1]/a/text()',
+        l.add_xpath('Subtitle',
+                    '//header/h4/text()',
                     MapCompose(unicode.strip))
-        l.add_xpath('ISBIN', '//div[contains(@class, "book-detail")]//dd[2]/text()',
+        l.add_xpath('Image',
+                    '//img[contains(@class,"attachment-post-thumbnail")]/@src',
                     MapCompose(unicode.strip))
-        l.add_xpath('Year', '//div[contains(@class, "book-detail")]//dd[3]/text()',
+        l.add_xpath('Author',
+                    '//div[contains(@class, "book-detail")]//dd[1]/a/text()',
                     MapCompose(unicode.strip))
-        l.add_xpath('Pages', '//div[contains(@class, "book-detail")]//dd[4]/text()',
+        l.add_xpath('ISBIN',
+                    '//div[contains(@class, "book-detail")]//dd[2]/text()',
                     MapCompose(unicode.strip))
-        l.add_xpath('Language', '//div[contains(@class, "book-detail")]//dd[5]/text()',
+        l.add_xpath('Year',
+                    '//div[contains(@class, "book-detail")]//dd[3]/text()',
                     MapCompose(unicode.strip))
-        l.add_xpath('File_Size', '//div[contains(@class, "book-detail")]//dd[6]/text()',
+        l.add_xpath('Pages',
+                    '//div[contains(@class, "book-detail")]//dd[4]/text()',
                     MapCompose(unicode.strip))
-        l.add_xpath('File_Format', '//div[contains(@class, "book-detail")]//dd[7]/text()',
+        l.add_xpath('Language',
+                    '//div[contains(@class, "book-detail")]//dd[5]/text()',
                     MapCompose(unicode.strip))
-        l.add_xpath('Category', '//div[contains(@class, "book-detail")]//dd[8]//a/text()',
+        l.add_xpath('File_Size',
+                    '//div[contains(@class, "book-detail")]//dd[6]/text()',
                     MapCompose(unicode.strip))
-        l.add_xpath('Description', '//div[contains(@class,"entry-content")]',
+        l.add_xpath('File_Format',
+                    '//div[contains(@class, "book-detail")]//dd[7]/text()',
+                    MapCompose(unicode.strip))
+        l.add_xpath('Category',
+                    '//div[contains(@class, "book-detail")]//dd[8]//a/text()',
+                    MapCompose(unicode.strip))
+        l.add_xpath('Description',
+                    '//div[contains(@class,"entry-content")]',
                     MapCompose(lambda s: s.replace('\n', ''),
                                lambda s: s.replace('\b', ''),
                                lambda s: s.replace('\f', ''),
