@@ -20,7 +20,8 @@ Note.  One of this projects dependencies, [scrapy-mongodb](https://github.com/se
 ```Python
 MONGODB_URI = ''
 MONGODB_DATABASE = ''
-MONGODB_COLLECTION = '' ```
+MONGODB_COLLECTION = ''
+``` 
 
 - Other MongoDB settings can be found here at the [scrapy-mongodb repo.](https://github.com/sebdah/scrapy-mongodb/blob/master/README.md)
 
