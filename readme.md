@@ -1,6 +1,6 @@
-# Project Title
+# All IT Ebooks.com Scraper
 
-All IT Ebooks.com Scraper
+This project has been superceded by my new dockerized [Ebook API](https://github.com/Jeffallan/Ebook-API).
 
 A program that scrapes links, and other data, to your favorite tech ebooks from [allitebooks.com](http://allitebooks.com) and stores them in a MongoDB instance.
 
